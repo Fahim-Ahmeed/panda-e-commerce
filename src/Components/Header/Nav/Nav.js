@@ -4,6 +4,10 @@ import "./Nav.css";
 import logo from "../../../images/logo.png"
 
 function Nav() {
+  const logout=()=>{
+    localStorage.clear();
+    window.location.reload(false)
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light text-center">
@@ -44,11 +48,21 @@ function Nav() {
                 Manage
               </Link>
             </li>
+           {
+            localStorage.getItem("email")?
+            
+            <li className="nav-item" onClick={logout}>
+            <Link className="nav-link"  to="">
+              Logout
+            </Link>
+          </li>
+            :
             <li className="nav-item">
-              <Link className="nav-link"  to="/login">
-                Login
-              </Link>
-            </li>
+            <Link className="nav-link"  to="/login">
+              Login
+            </Link>
+          </li>
+           }
             <li className="nav-item">
               <Link className="nav-link" to="/contact">
                 Contact

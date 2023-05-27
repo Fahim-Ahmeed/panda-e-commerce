@@ -1,10 +1,13 @@
 import React, {useContext}from 'react';
 import './Login.css';
 import avatar from '../../images/avatar.png';
-// import Nav from './../Home/Nav/Nav';
-// import Footer from '../Footer/Footer';
+import fbLogo from '../../images/fb.png';
 import {UserContext}from'../../App';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import {auth,googleProvider} from"./firebase.js";
+import {createUserWithEmailAndPassword,signInWithPopup,signOut}  from "firebase/auth";
+import { useState } from 'react';
+
 
 
 function Login() {
@@ -15,7 +18,44 @@ function Login() {
   const history = useHistory()
     const location = useLocation()
     let { from } = location.state || { from: { pathname: "/" } };
- 
+const signInWithGoogle=async()=>{
+  try{
+    await signInWithPopup(auth,googleProvider);
+    var email=auth?.currentUser?.email;
+    console.log(email);
+    localStorage.setItem("email",email);
+    // localStorage.setItem("name",firstName);
+
+  }
+  catch(err){
+    console.error(err)
+  }
+} 
+
+// const signInWithGoogle= () => {
+//   firebase.auth().signInWithPopup(provider)
+//       .then(result => {
+//           var token = result.credential.accessToken;
+//           var user = result.user;
+//           localStorage.setItem("email",user.email)
+//       })
+//       .catch(error => {
+//           var errorCode = error.code;
+//           var errorMessage = error.message;
+//           var email = error.email;
+//           var credential = error.credential;
+//           console.log(errorMessage)
+
+//       });
+// }
+
+const logout=async()=>{
+  try{
+    await signInWithPopup(auth,googleProvider);
+  }catch(err){
+    console.error(err);
+  }
+}
   const setEmail=(value)=>{
     const email={
       email:value,
@@ -76,6 +116,21 @@ function Login() {
 
      
   </form>
+
+
+  <div className="d-flex justify-content-center" onClick={signInWithGoogle}>
+                    <button className="login-btn text-left" >
+                        <img width="30px" src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                        <b className="pr-5">Continue with Google</b>
+                    </button><br />
+                </div>
+
+                <div className="d-flex justify-content-center">
+                    <button className="login-btn text-left" >
+                        <img width="30px" src={fbLogo} />
+                        <b className="pr-5">Continue with Facebook</b>
+                    </button>
+                </div>
         </div>
 
         {/* <Footer></Footer> */}
