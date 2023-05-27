@@ -30,18 +30,18 @@ function Nav() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/service">
-                Service
+              <Link className="nav-link" to="/review">
+                Review
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/supply">
-                Supply
+              <Link className="nav-link" to="/shipment">
+                Shipment
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/tools">
-                Tools
+              <Link className="nav-link" to="/manage">
+                Manage
               </Link>
             </li>
             <li className="nav-item">
