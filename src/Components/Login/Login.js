@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 function Login() {
   const [admin,setAdmin]=useContext(UserContext);
+  const [loggedInUser,setloggedInUser]=useContext(UserContext);
   // console.log(admin);
   // console.log(localStorage.getItem('email'));
   // console.log(localStorage.getItem('password'));
@@ -22,6 +23,7 @@ const signInWithGoogle=async()=>{
   try{
     await signInWithPopup(auth,googleProvider);
     var email=auth?.currentUser?.email;
+    setloggedInUser(email);
     console.log(email);
     localStorage.setItem("email",email);
     // localStorage.setItem("name",firstName);
@@ -31,6 +33,7 @@ const signInWithGoogle=async()=>{
     console.error(err)
   }
 } 
+
 
 // const signInWithGoogle= () => {
 //   firebase.auth().signInWithPopup(provider)

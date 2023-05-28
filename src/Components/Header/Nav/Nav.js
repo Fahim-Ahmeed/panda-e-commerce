@@ -2,12 +2,22 @@ import { Link } from "react-router-dom";
 import React from "react";
 import "./Nav.css";
 import logo from "../../../images/logo.png"
+import { useContext } from "react";
+import { UserContext } from "../../../App";
 
 function Nav() {
+  const[loggedInUser,setloggedInUser]=useContext(UserContext);
   const logout=()=>{
     localStorage.clear();
-    window.location.reload(false)
+    window.location.reload(true)
+    console.log(user)
   }
+  let user=localStorage.getItem("email");
+  const login=()=>{
+    console.log(user)
+  }
+  
+  console.log(user)
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light text-center">
@@ -48,21 +58,21 @@ function Nav() {
                 Manage
               </Link>
             </li>
-           {
-            localStorage.getItem("email")?
-            
-            <li className="nav-item" onClick={logout}>
-            <Link className="nav-link"  to="">
-              Logout
-            </Link>
-          </li>
-            :
-            <li className="nav-item">
-            <Link className="nav-link"  to="/login">
-              Login
-            </Link>
-          </li>
-           }
+            {
+              user
+              ?
+              <li className="nav-item">
+              <Link className="nav-link" to="" onClick={logout}>
+                logOut
+              </Link>
+            </li>
+              :
+              <li className="nav-item">
+              <Link className="nav-link" to="/login">
+                login
+              </Link>
+            </li>
+            }
             <li className="nav-item">
               <Link className="nav-link" to="/contact">
                 Contact
